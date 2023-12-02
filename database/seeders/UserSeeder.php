@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $param = [
+            'name' => 'テストユーザー',
+            'name_kana' => 'てすとゆーざー',
+            'email' => 'admin@example.com',
+            'email_verified_at' => DB::raw('CURRENT_TIMESTAMP'),
+            'password' => Hash::make('admin123'),
+            'joining_date' => now(),
+            'authority' => 1,
+        ];
+
+        DB::table('users')->insert($param);
+    }
+}

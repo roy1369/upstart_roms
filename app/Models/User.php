@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +21,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'name_kana',
         'email',
         'password',
+        'joining_date',
+        'retirement_date',
+        'authority',
     ];
 
     /**
@@ -42,4 +48,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // 勤怠情報テーブル
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id')->withTrashed();
+    }
+
+    // 有給管理テーブル
+    public function paidHolidays()
+    {
+        return $this->hasMany(PaidHoliday::class, 'user_id')->withTrashed();
+    }
+
+    // 各種申請テーブル
+    public function variousRequests()
+    {
+        return $this->hasMany(VariousRequest::class, 'user_id')->withTrashed();
+    }
+
+    // 月報情報テーブル
+    public function monthlyReports()
+    {
+        return $this->hasMany(MonthlyReport::class, 'user_id')->withTrashed();
+    }
+
 }
