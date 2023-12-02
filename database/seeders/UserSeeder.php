@@ -25,5 +25,17 @@ class UserSeeder extends Seeder
         ];
 
         DB::table('users')->insert($param);
+
+        $param = [
+            'name' => '社員A',
+            'name_kana' => 'しゃいんA',
+            'email' => 'sample1@sample.com',
+            'email_verified_at' => DB::raw('CURRENT_TIMESTAMP'),
+            'password' => Hash::make('apassword'),
+            'joining_date' => now(),
+            'authority' => 0,
+        ];
+
+        DB::table('users')->insert($param);
     }
 }
