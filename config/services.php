@@ -31,4 +31,19 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'workingAddress' => [
+        0 => 'A店',
+        1 => 'B店',
+        2 => 'C店',
+        3 => 'D店',
+        4 => 'E店',
+    ],
+
+    'workingType' => [
+        0 => 'A勤務',
+        1 => 'B勤務',
+        2 => 'C勤務',
+        3 => 'D勤務',
+    ],
+
 ];

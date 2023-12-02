@@ -10,6 +10,8 @@ class ViewAttendance extends ViewRecord
 {
     protected static string $resource = AttendanceResource::class;
 
+    protected static ?string $title = '勤怠情報詳細';
+
     protected function getActions(): array
     {
         return [
