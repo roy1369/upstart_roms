@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'name_kana' => 'しゃいんA',
             'email' => 'sample1@sample.com',
             'email_verified_at' => DB::raw('CURRENT_TIMESTAMP'),
-            'password' => Hash::make('apassword'),
+            'password' => Hash::make('password'),
             'joining_date' => now(),
             'authority' => 0,
         ];
