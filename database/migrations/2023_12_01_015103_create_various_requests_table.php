@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('various_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->comment('ユーザーID');
-            $table->integer('type', 11)->comment('申請種別');
+            $table->integer('type')->comment('申請種別');
             $table->date('result')->comment('申請期間');
-            $table->integer('status', 11)->comment('申請状況');
+            $table->integer('status')->comment('申請状況');
             $table->time('correction_start_time')->nullable(true)->comment('修正出勤時間');
             $table->time('correction_end_time')->nullable(true)->comment('修正退勤時間');
             $table->text('comment')->comment('申請理由');

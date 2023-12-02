@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password', 128)->comment('パスワード');
             $table->rememberToken();
             $table->date('joining_date')->comment('入社日');
-            $table->date('ritirement_date')->comment('退職日');
+            $table->date('ritirement_date')->nullable(true)->comment('退職日');
             $table->boolean('authority')->default(0)->comment('権限種別');
             $table->timestamps();
             $table->softDeletes();

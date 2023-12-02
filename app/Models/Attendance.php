@@ -17,5 +17,11 @@ class Attendance extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    // ユーザーテーブル
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     
 }

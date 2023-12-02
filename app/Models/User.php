@@ -48,4 +48,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // 勤怠情報テーブル
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id')->withTrashed();
+    }
+
+    // 有給管理テーブル
+    public function paidHolidays()
+    {
+        return $this->hasMany(PaidHoliday::class, 'user_id')->withTrashed();
+    }
+
+    // 各種申請テーブル
+    public function variousRequests()
+    {
+        return $this->hasMany(VariousRequest::class, 'user_id')->withTrashed();
+    }
+
+    // 月報情報テーブル
+    public function monthlyReports()
+    {
+        return $this->hasMany(MonthlyReport::class, 'user_id')->withTrashed();
+    }
+
 }
