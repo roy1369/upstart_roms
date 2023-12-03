@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\AttendanceResource\Pages;
+namespace App\Filament\Resources\UserResource\Pages;
 
-use App\Filament\Resources\AttendanceResource;
+use App\Filament\Resources\UserResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditAttendance extends EditRecord
+class EditUser extends EditRecord
 {
-    protected static string $resource = AttendanceResource::class;
+    protected static string $resource = UserResource::class;
 
-    protected static ?string $title = '勤怠情報編集';
+    protected static ?string $title = 'アカウント情報編集';
 
     protected function getActions(): array
     {
