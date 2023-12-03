@@ -22,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceResource extends Resource
 {
@@ -205,5 +206,17 @@ class AttendanceResource extends Resource
             'view' => Pages\ViewAttendance::route('/{record}'),
             'edit' => Pages\EditAttendance::route('/{record}/edit'),
         ];
-    }    
+    }  
+    
+    public static function getEloquentQuery(): Builder
+    {
+        // 権限がない場合の処理
+        if (auth()->user()->authority !== 1) {
+            return parent::getEloquentQuery()
+                ->where('user_id', Auth::id());
+        // 権限がある場合の処理
+        } else {
+            return parent::getEloquentQuery();
+        }
+    }
 }
