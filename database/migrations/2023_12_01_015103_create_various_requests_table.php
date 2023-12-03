@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('status')->comment('申請状況');
             $table->time('correction_start_time')->nullable(true)->comment('修正出勤時間');
             $table->time('correction_end_time')->nullable(true)->comment('修正退勤時間');
+            $table->integer('correction_transportation_expenses')->nullable(true)->comment('修正交通費');
             $table->text('comment')->comment('申請理由');
             $table->timestamps();
             $table->softDeletes();
