@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 128)->comment('パスワード');
             $table->rememberToken();
-            $table->date('joining_date')->comment('入社日');
+            $table->date('joining_date')->nullable(true)->comment('入社日');
             $table->date('ritirement_date')->nullable(true)->comment('退職日');
             $table->boolean('authority')->default(0)->comment('権限種別');
             $table->boolean('transportation_expenses_flag')->default(0)->comment('交通費フラグ');
