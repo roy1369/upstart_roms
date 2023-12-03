@@ -56,40 +56,47 @@ class AttendanceResource extends Resource
                             ->label('出勤時間')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // あとで現在の位置情報を取得できるように修正
                         TextInput::make('start_address')
                             ->label('出勤住所')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // 退勤ボタンアクションで実行する
                         TimePicker::make('end_time')
                             ->label('退勤時間')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // あとで現在の位置情報を取得できるように修正　退勤ボタンアクションで実行する
                         TextInput::make('end_address')
                             ->label('退勤住所')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // 退勤ボタンアクションで実行する
                         TimePicker::make('working_time')
                             ->label('勤務時間')
                             ->placeholder('自動入力')
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // 退勤ボタンアクションで実行する
                         TimePicker::make('rest_time')
                             ->label('休憩時間')
                             ->placeholder('自動入力')
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         // 退勤ボタンアクションで実行する
                         TimePicker::make('over_time')
                             ->label('残業時間')
                             ->placeholder('自動入力')
-                            ->disabled(! auth()->user()->authority),
+                            // ->disabled(! auth()->user()->authority),
+                            ->disabled(),
                         TextInput::make('transportation_expenses')
                             ->label('交通費')
                             ->placeholder('往復分で入力')

@@ -22,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class VariousRequestResource extends Resource
 {
@@ -48,6 +49,7 @@ class VariousRequestResource extends Resource
                         Select::make('type')
                             ->label('申請種別')
                             ->required()
+                            ->placeholder('申請種別の選択')
                             ->options(config('services.type')),
                         TimePicker::make('correction_start_time')
                             ->label('修正出勤時間')
@@ -77,7 +79,12 @@ class VariousRequestResource extends Resource
                         ->label('氏名')
                         ->hidden((! auth()->user()->authority))
                         ->toggleable(isToggledHiddenByDefault: false)
-                        ->view('tables.columns.user-name-switcher'),
+                        ->view('tables.columns.user-name-switcher')
+                        ->searchable(query: function (Builder $query, string $search): Builder {
+                            return $query->whereHas('user', function (Builder $subQuery) use ($search) {
+                                $subQuery->where('name', 'like', "%{$search}%");
+                            });
+                        }),
                     TextColumn::make('result')
                         ->label('申請日')
                         ->searchable()
@@ -208,5 +215,18 @@ class VariousRequestResource extends Resource
             'index' => Pages\ListVariousRequests::route('/'),
             'create' => Pages\CreateVariousRequest::route('/create'),
         ];
-    }    
+    }   
+    
+    public static function getEloquentQuery(): Builder
+    {
+        // 権限がない場合の処理
+        if (auth()->user()->authority !== 1) {
+            return parent::getEloquentQuery()
+                ->where('user_id', Auth::id());
+        // 権限がある場合の処理
+        } else {
+            return parent::getEloquentQuery();
+        }
+    }
+
 }
