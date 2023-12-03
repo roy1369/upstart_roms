@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('joining_date')->comment('入社日');
             $table->date('ritirement_date')->nullable(true)->comment('退職日');
             $table->boolean('authority')->default(0)->comment('権限種別');
+            $table->boolean('transportation_expenses_flag')->default(0)->comment('交通費フラグ');
             $table->timestamps();
             $table->softDeletes();
         });
