@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\AttendanceResource\Pages;
 
 use App\Filament\Resources\AttendanceResource;
+use App\Models\Attendance;
+use Carbon\Carbon;
+use Filament\Notifications\Notification;
 use Filament\Pages\Actions;
 use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Pages\CreateRecord;
@@ -29,5 +32,23 @@ class CreateAttendance extends CreateRecord
         $data['start_address'] = '猫県猫市猫谷町２－２２';
     
         return $data;
+    }
+
+    protected function beforeCreate(): void
+    {
+        $record = Attendance::where('user_id', Auth::id())
+            ->whereDate('date', Carbon::today())
+            ->first();
+
+        if ($record) {
+            Notification::make()
+                ->warning()
+                ->title('すでに本日の出勤データが作成されています。')
+                ->persistent()
+                ->send();
+            
+            $this->halt();
+        }
+
     }
 }

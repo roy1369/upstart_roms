@@ -15,7 +15,7 @@ class AttendaceSeeder extends Seeder
     public function run(): void
     {
         $param = [
-            'user_id' => 0,
+            'user_id' => 1,
             'date' => now(),
             'start_address' => '猫県猫市猫谷町２－２２',
             'start_time' => now(),
@@ -27,7 +27,7 @@ class AttendaceSeeder extends Seeder
         DB::table('attendances')->insert($param);
 
         $param = [
-            'user_id' => 2,
+            'user_id' => 3,
             'date' => now(),
             'start_address' => '猫県猫市猫谷町２－２２',
             'start_time' => now(),
@@ -39,7 +39,7 @@ class AttendaceSeeder extends Seeder
         DB::table('attendances')->insert($param);
 
         $param = [
-            'user_id' => 1,
+            'user_id' => 2,
             'date' => now(),
             'start_address' => '猫県猫市猫谷町２－２２',
             'start_time' => now(),

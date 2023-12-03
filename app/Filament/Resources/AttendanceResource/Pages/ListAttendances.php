@@ -17,4 +17,15 @@ class ListAttendances extends ListRecords
                 ->label('出勤'),
         ];
     }
+
+    public function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    public function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
+
 }
