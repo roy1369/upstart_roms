@@ -107,10 +107,15 @@ class AttendanceResource extends Resource
             ->columns([
                 Split::make([
                     ViewColumn::make('user_id')
-                    ->label('氏名')
-                    ->hidden((! auth()->user()->authority))
-                    ->toggleable(isToggledHiddenByDefault: false)
-                    ->view('tables.columns.user-name-switcher'),
+                        ->label('氏名')
+                        ->hidden((! auth()->user()->authority))
+                        ->toggleable(isToggledHiddenByDefault: false)
+                        ->view('tables.columns.user-name-switcher')
+                        ->searchable(query: function (Builder $query, string $search): Builder {
+                            return $query->whereHas('user', function (Builder $subQuery) use ($search) {
+                                $subQuery->where('name', 'like', "%{$search}%");
+                            });
+                        }),
                     TextColumn::make('date')
                         ->label('出勤日')
                         ->searchable()
