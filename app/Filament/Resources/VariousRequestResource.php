@@ -122,8 +122,10 @@ class VariousRequestResource extends Resource
                     ->visible(
                         function ($record) :bool{
                             $ret = false;
-                            // あとで結果に応じた表示の制御を追加
-                            $ret = true;
+                            // 申請状況が申請中なら表示処理
+                            if ($record['status'] === 0) {
+                                $ret = true;
+                            }
                             return $ret;
                         }
                     ),
@@ -134,8 +136,10 @@ class VariousRequestResource extends Resource
                     ->visible(
                         function ($record) :bool{
                             $ret = false;
-                            // あとで結果に応じた表示の制御を追加
-                            $ret = true;
+                            // 申請状況が承認済みなら表示処理
+                            if ($record['status'] === 1) {
+                                $ret = true;
+                            }
                             return $ret;
                         }
                     ),
@@ -146,8 +150,10 @@ class VariousRequestResource extends Resource
                     ->visible(
                         function ($record) :bool{
                             $ret = false;
-                            // あとで結果に応じた表示の制御を追加
-                            $ret = true;
+                            // 申請状況が却下なら表示処理
+                            if ($record['status'] === 2) {
+                                $ret = true;
+                            }
                             return $ret;
                         }
                     ),
@@ -166,11 +172,14 @@ class VariousRequestResource extends Resource
 
                         }
                     )
+                    // 申請状況が申請中かつ管理者なら表示処理
+                    ->hidden(! auth()->user()->authority)
                     ->visible(
                         function ($record) :bool{
                             $ret = false;
-                            // あとで承認か却下実施後は非表示になるように制御する　監理者のみ表示の制御も追加する
-                            $ret = true;
+                            if ($record['status'] === 0) {
+                                $ret = true;
+                            }
                             return $ret;
                         }
                     ),
@@ -187,11 +196,14 @@ class VariousRequestResource extends Resource
 
                         }
                     )
+                    // 申請状況が申請中かつ管理者なら表示処理
+                    ->hidden(! auth()->user()->authority)
                     ->visible(
                         function ($record) :bool{
                             $ret = false;
-                            // あとで承認か却下実施後は非表示になるように制御する　監理者のみ表示の制御も追加する
-                            $ret = true;
+                            if ($record['status'] === 0) {
+                                $ret = true;
+                            }
                             return $ret;
                         }
                     ),

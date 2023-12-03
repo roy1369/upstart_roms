@@ -16,4 +16,15 @@ class ListVariousRequests extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    public function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
+    
 }
