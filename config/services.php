@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'app' => [
+        'url' => env('APP_URL'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
