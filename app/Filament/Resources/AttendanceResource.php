@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use App\Filament\Resources\AttendanceResource\Pages;
 use App\Filament\Resources\AttendanceResource\RelationManagers;
 use App\Models\Attendance;
@@ -20,10 +21,10 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
+use Torann\GeoIP\Facades\GeoIP;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
-
 class AttendanceResource extends Resource
 {
     protected static ?string $model = Attendance::class;
@@ -56,47 +57,36 @@ class AttendanceResource extends Resource
                             ->label('出勤時間')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
+                            ->disabled(! auth()->user()->authority),
                         // あとで現在の位置情報を取得できるように修正
                         TextInput::make('start_address')
                             ->label('出勤住所')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
-                        // 退勤ボタンアクションで実行する
+                            ->disabled(! auth()->user()->authority),
                         TimePicker::make('end_time')
                             ->label('退勤時間')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
+                            ->disabled(! auth()->user()->authority),
                         // あとで現在の位置情報を取得できるように修正　退勤ボタンアクションで実行する
                         TextInput::make('end_address')
                             ->label('退勤住所')
                             ->placeholder('自動入力')
                             ->hidden(! auth()->user()->authority)
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
-                        // 退勤ボタンアクションで実行する
+                            ->disabled(! auth()->user()->authority),
                         TimePicker::make('working_time')
                             ->label('勤務時間')
                             ->placeholder('自動入力')
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
-                        // 退勤ボタンアクションで実行する
+                            ->disabled(! auth()->user()->authority),
                         TimePicker::make('rest_time')
                             ->label('休憩時間')
                             ->placeholder('自動入力')
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
-                        // 退勤ボタンアクションで実行する
+                            ->disabled(! auth()->user()->authority),
                         TimePicker::make('over_time')
                             ->label('残業時間')
                             ->placeholder('自動入力')
-                            // ->disabled(! auth()->user()->authority),
-                            ->disabled(),
+                            ->disabled(! auth()->user()->authority),
                         TextInput::make('transportation_expenses')
                             ->label('交通費')
                             ->placeholder('往復分で入力')
@@ -161,8 +151,20 @@ class AttendanceResource extends Resource
                     ->modalsubheading('本当に退勤しますか？')
                     ->action(
                         function ($record){
-                            // あとで退勤時刻と退勤場所の保存処理を追加
+                            // 退勤時刻の保存処理
+                            $start_time = Carbon::parse($record->start_time);
+                            $end_time = Carbon::parse($record->end_time);
 
+                            // 差分を計算して HH:mm:ss 形式にフォーマット
+                            $working_time = $end_time->diff($start_time)->format('%H:%I:%S');
+
+                            // 後で位置情報を取得する処理をここに追加する
+
+                            // データベースに保存
+                            $record->update([
+                                'end_time' => $end_time,
+                                'working_time' => $working_time,
+                            ]);
                         }
                     )
                     ->visible(
@@ -231,4 +233,5 @@ class AttendanceResource extends Resource
             return parent::getEloquentQuery();
         }
     }
+
 }
