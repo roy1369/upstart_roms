@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AttendaceSeeder::class);
         $this->call(VariousRequestSeeder::class);
         $this->call(MonthlyReportSeeder::class);
+        $this->call(PaidHolidaySeeder::class);
     }
 }

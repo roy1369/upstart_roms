@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // 毎月1日の10時に有給付与バッチを呼び出す
+        $schedule->command('app:update-paid-holidays')->monthlyOn(1, '10:00');
     }
 
     /**

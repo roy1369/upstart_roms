@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'app' => [
+        'url' => env('APP_URL'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -43,7 +47,8 @@ return [
         0 => 'A勤務',
         1 => 'B勤務',
         2 => 'C勤務',
-        3 => 'D勤務',
+        3 => 'D勤務（特殊）',
+        4 => 'E勤務（特殊）',
     ],
 
     'type' => [
