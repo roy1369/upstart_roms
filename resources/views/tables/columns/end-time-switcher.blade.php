@@ -1,6 +1,6 @@
 <div>
     @php
-    $nextPaidHoliday = '';
+    $endTime = '';
     if (!is_null($getState())) {
         // $getState()の値を取得
         $getStateValue = $getState();
@@ -9,12 +9,12 @@
         $dateObject = new \DateTime($getStateValue);
 
         // 2023年6月1日の形式にフォーマット
-        $formattedDate = $dateObject->format('Y年n月j日');
+        $formattedDate = $dateObject->format('G時i分');
 
         // 変換された日付を含む文言の作成
-        $nextPaidHoliday = '次回有給取得予定日 ' . $formattedDate;
+        $endTime = '退勤時間：' . $formattedDate;
     }
     @endphp
 
-    {{ $nextPaidHoliday }}
+    {{ $endTime }}
 </div>
