@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->comment('ユーザーID');
             $table->integer('amount')->dafault(0)->comment('残日数');
+            $table->date('next_paid_holiday')->nullable(true)->comment('次回有給取得日');
             $table->timestamps();
             $table->softDeletes();
         });

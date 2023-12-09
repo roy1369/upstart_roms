@@ -56,7 +56,7 @@ class PaidHolidayResource extends Resource
                         ->label('有給残日数')
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->view('tables.columns.amount-switcher'),
-                    ViewColumn::make('id')
+                    ViewColumn::make('next_paid_holiday')
                         ->label('次回有給取得予定日')
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->view('tables.columns.next-amount-switcher'),

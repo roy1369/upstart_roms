@@ -8,6 +8,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -40,6 +41,7 @@ class UserResource extends Resource
             ->schema([
                 Grid::make(1)
                     ->schema([
+                        Hidden::make('id'),
                         TextInput::make('name')
                             ->label('氏名')
                             ->placeholder('フルネームで入力')
