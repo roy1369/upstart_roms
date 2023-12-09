@@ -1,5 +1,7 @@
 <div>
     @php
+    $nextPaidHoliday = '';
+    if (!is_null($getState())) {
         // $getState()の値を取得
         $getStateValue = $getState();
 
@@ -11,6 +13,7 @@
 
         // 変換された日付を含む文言の作成
         $nextPaidHoliday = '次回有給取得予定日 ' . $formattedDate;
+    }
     @endphp
 
     {{ $nextPaidHoliday }}

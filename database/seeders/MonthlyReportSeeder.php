@@ -15,7 +15,7 @@ class MonthlyReportSeeder extends Seeder
     {
         $param = [
             'user_id' => 1,
-            'date' => '2023-11-01',
+            'date' => '2023-10-01',
             'total_working_time' => '176:00:00',
             'total_over_time' => '03:45:00',
             'num_working_days' => 22,
@@ -25,7 +25,7 @@ class MonthlyReportSeeder extends Seeder
 
         $param = [
             'user_id' => 2,
-            'date' => '2023-11-01',
+            'date' => '2023-10-01',
             'total_working_time' => '168:00:00',
             'total_over_time' => '00:00:00',
             'num_working_days' => 21,

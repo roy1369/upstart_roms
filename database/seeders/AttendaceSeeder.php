@@ -16,11 +16,44 @@ class AttendaceSeeder extends Seeder
     {
         $param = [
             'user_id' => 1,
-            'date' => now(),
+            'date' => '2023-11-01',
             'start_address' => '猫県猫市猫谷町２－２２',
-            'start_time' => now(),
+            'start_time' => '10:00:00',
             'working_address' => 0,
             'working_type' => 1,
+            'end_time' => '19:00:00',
+            'working_time' => '08:00:00',
+            'rest_time' => '01:00:00',
+            'transportation_expenses' => 1200,
+        ];
+
+        DB::table('attendances')->insert($param);
+
+        $param = [
+            'user_id' => 1,
+            'date' => '2023-11-02',
+            'start_address' => '猫県猫市猫谷町２－２２',
+            'start_time' => '10:00:00',
+            'working_address' => 0,
+            'working_type' => 1,
+            'end_time' => '19:00:00',
+            'working_time' => '08:00:00',
+            'rest_time' => '01:00:00',
+            'transportation_expenses' => 1200,
+        ];
+
+        DB::table('attendances')->insert($param);
+
+        $param = [
+            'user_id' => 1,
+            'date' => '2023-11-03',
+            'start_address' => '猫県猫市猫谷町２－２２',
+            'start_time' => '10:00:00',
+            'working_address' => 0,
+            'working_type' => 1,
+            'end_time' => '19:00:00',
+            'working_time' => '08:00:00',
+            'rest_time' => '01:00:00',
             'transportation_expenses' => 1200,
         ];
 
