@@ -94,14 +94,14 @@ class VariousRequestResource extends Resource
                         ->label('申請種別')
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->view('tables.columns.type-switcher'),
-                    TextColumn::make('correction_start_time')
+                    ViewColumn::make('correction_start_time')
                         ->label('修正出勤時間')
                         ->toggleable(isToggledHiddenByDefault: false)
-                        ->dateTime('G時i分'),
-                    TextColumn::make('correction_end_time')
+                        ->view('tables.columns.start-time-switcher'),
+                    ViewColumn::make('correction_end_time')
                         ->label('修正退勤時間')
                         ->toggleable(isToggledHiddenByDefault: false)
-                        ->dateTime('G時i分'),
+                        ->view('tables.columns.end-time-switcher'),
                     TextColumn::make('correction_transportation_expenses')
                         ->label('修正交通費')
                         ->toggleable(isToggledHiddenByDefault: false)

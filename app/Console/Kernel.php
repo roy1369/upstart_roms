@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
     {
         // 毎月1日の10時に有給付与バッチを呼び出す
         $schedule->command('app:update-paid-holidays')->monthlyOn(1, '10:00');
+        // 毎月1日の10時に月報バッチを呼び出す
+        $schedule->command('app:monthly-reports')->monthlyOn(1, '10:00');
     }
 
     /**

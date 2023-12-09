@@ -100,11 +100,6 @@ class UserResource extends Resource
                         ->searchable()
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->dateTime('Y年m月d日'),
-                    TextColumn::make('updated_at')
-                        ->label('更新日')
-                        ->searchable()
-                        ->toggleable(isToggledHiddenByDefault: false)
-                        ->dateTime('Y年m月d日'),
                 ])->from('md')
             ])
             ->filters([

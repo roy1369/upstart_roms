@@ -57,16 +57,16 @@ class MonthlyReportResource extends Resource
                         ->searchable()
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->dateTime('Y年m月'),
-                    TextColumn::make('total_working_time')
+                    ViewColumn::make('total_working_time')
                         ->label('月間勤務時間')
                         ->searchable()
+                        ->view('tables.columns.woking-time-switcher')
                         ->toggleable(isToggledHiddenByDefault: false),
-                        // ->dateTime('G時間i分'),
-                    TextColumn::make('total_over_time')
+                    ViewColumn::make('total_over_time')
                         ->label('月間残業時間')
                         ->searchable()
+                        ->view('tables.columns.over-time-switcher')
                         ->toggleable(isToggledHiddenByDefault: false),
-                        // ->dateTime('G時間i分'),
                 ])->from('md')
             ])
             ->filters([

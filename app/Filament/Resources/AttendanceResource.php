@@ -126,16 +126,16 @@ class AttendanceResource extends Resource
                         ->label('出勤形態')
                         ->toggleable(isToggledHiddenByDefault: false)
                         ->view('tables.columns.working-type-switcher'),
-                    TextColumn::make('start_time')
+                    ViewColumn::make('start_time')
                         ->label('出勤時間')
                         ->searchable()
                         ->toggleable(isToggledHiddenByDefault: false)
-                        ->dateTime('G時i分'),
-                    TextColumn::make('end_time')
+                        ->view('tables.columns.start-time-switcher'),
+                    ViewColumn::make('end_time')
                         ->label('退勤時間')
                         ->searchable()
                         ->toggleable(isToggledHiddenByDefault: false)
-                        ->dateTime('G時i分'),
+                        ->view('tables.columns.end-time-switcher'),
                 ])->from('md')
             ])
             ->filters([
