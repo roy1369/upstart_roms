@@ -25,6 +25,10 @@ return [
         'scheme' => 'https',
     ],
 
+    'mail' => [
+        'cc' => env('MAil_CC'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
