@@ -271,7 +271,7 @@ class VariousRequestResource extends Resource
                                     break;
                                         
                                 default:
-                                    # code...
+                                    // 
                                     break;
                             }
 
