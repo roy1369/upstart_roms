@@ -18,6 +18,8 @@ class VariousRequestSeeder extends Seeder
             'type' => 0,
             'result' => now(),
             'status' => 0,
+            'correction_working_address' => 0,
+            'correction_working_type' =>0,
             'correction_start_time' => now(),
             'correction_end_time' => now(),
             'comment' => '打刻を忘れていたため',

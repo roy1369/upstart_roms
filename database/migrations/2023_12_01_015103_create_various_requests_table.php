@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('type')->comment('申請種別');
             $table->date('result')->comment('申請期間');
             $table->integer('status')->comment('申請状況');
+            $table->integer('correction_working_address')->nullable(true)->comment('修正勤務先');
+            $table->integer('correction_working_type')->nullable(true)->comment('修正勤務形態');
             $table->time('correction_start_time')->nullable(true)->comment('修正出勤時間');
             $table->time('correction_end_time')->nullable(true)->comment('修正退勤時間');
             $table->integer('correction_transportation_expenses')->nullable(true)->comment('修正交通費');

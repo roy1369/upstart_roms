@@ -20,11 +20,18 @@ class Attendance extends Model
     ];
 
     protected $fillable = [
+        'user_id',
+        'date',
+        'start_address',
         'start_time',
+        'working_address',
+        'working_type',
+        'end_address', 
         'end_time',
+        'transportation_expenses',
         'working_time',
         'rest_time',
-        'working_type',
+        'over_time',
     ];
 
     // ユーザーテーブル

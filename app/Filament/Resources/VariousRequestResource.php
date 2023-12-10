@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VariousRequestResource\Pages;
 use App\Filament\Resources\VariousRequestResource\RelationManagers;
+use App\Models\Attendance;
+use App\Models\PaidHoliday;
 use App\Models\VariousRequest;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -17,6 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -51,6 +54,14 @@ class VariousRequestResource extends Resource
                             ->required()
                             ->placeholder('申請種別の選択')
                             ->options(config('services.type')),
+                        Select::make('correction_working_address')
+                            ->label('修正勤務先')
+                            ->placeholder('打刻修正の場合のみ選択')
+                            ->options(config('services.workingAddress')),
+                        Select::make('correction_working_type')
+                            ->label('修正勤務形態')
+                            ->placeholder('打刻修正の場合のみ選択')
+                            ->options(config('services.workingType')),
                         TimePicker::make('correction_start_time')
                             ->label('修正出勤時間')
                             ->placeholder('打刻修正の場合のみ入力'),
@@ -158,7 +169,25 @@ class VariousRequestResource extends Resource
                         }
                     ),
 
-                // 管理者権限のみ表示するアクション
+                DeleteAction::make()
+                    ->label('申請取消')
+                    ->button()
+                    ->icon('')
+                    ->requiresConfirmation()
+                    ->modalHeading('申請取消')
+                    ->modalsubheading('本当に取消しますか？')
+                    ->visible(
+                        function ($record) :bool{
+                            $ret = false;
+                            // 申請状況が申請中なら表示処理
+                            if ($record['status'] === 0) {
+                                $ret = true;
+                            }
+                            return $ret;
+                        }
+                    ),
+
+                // 以下は管理者権限のみ表示するアクション
                 Action::make('approval')
                     ->label('承認')
                     ->button()
@@ -169,6 +198,82 @@ class VariousRequestResource extends Resource
                     ->action(
                         function ($record){
                             // 承認時の処理を個々に記述
+                            switch ($record['type']) {
+                                case 0:
+                                    // 打刻修正の場合の処理
+                                    $attendance = Attendance::where('user_id', $record['user_id'])
+                                        ->whereDate('date', '=', $record['result']) 
+                                        ->first();
+
+                                        if (is_null($attendance)) {
+                                            // 該当のレコードがないので新規で作成する処理
+                                            $newAttendance = new Attendance();
+                                            $newAttendance->user_id = $record['user_id'];
+                                            $newAttendance->date = $record['result'];
+                                            $newAttendance->start_time = $record['correction_start_time'];
+                                            $newAttendance->working_address = $record['correction_working_address'];
+                                            $newAttendance->working_type = $record['correction_working_type'];
+                                            $newAttendance->end_time = $record['correction_end_time'];
+
+                                            // 保存
+                                            $newAttendance->save(); 
+                                        } else {
+                                            // 該当のレコードを更新する処理
+                                            $attendance->start_time = $record['correction_start_time'];
+                                            $attendance->working_address = $record['correction_working_address'];
+                                            $attendance->working_type = $record['correction_working_type'];
+                                            $attendance->end_time = $record['correction_end_time'];
+
+                                            // 保存
+                                            $attendance->save();
+                                        }
+
+                                        $record['status'] = 1;
+                                        $record->save();
+                                    break;
+                                
+                                case 1:
+                                    // 有給申請の場合の処理
+                                    $paidHoliday = PaidHoliday::where('user_id', $record['user_id'])
+                                        ->first();
+
+                                    $paidHoliday->amount -= 1;
+
+                                    // 保存
+                                    $paidHoliday->save();
+
+                                    $record['status'] = 1;
+                                    $record->save();
+
+                                    break;
+                            
+                                case 2:
+                                    // 交通費申請の場合の処理
+                                    $attendance = Attendance::where('user_id', $record['user_id'])
+                                        ->whereDate('date', '=', $record['result']) 
+                                        ->first();
+
+                                        if (!is_null($attendance)) {
+                                            // 該当のレコードを更新する処理
+                                            $attendance->transportation_expenses = $record['correction_transportation_expenses'];
+
+                                            // 保存
+                                            $attendance->save();
+
+                                            $record['status'] = 1;
+                                            $record->save();
+                                        } else {
+                                            $record['status'] = 2;
+                                            $record->save();
+
+                                        }
+
+                                    break;
+                                        
+                                default:
+                                    # code...
+                                    break;
+                            }
 
                         }
                     )
@@ -192,7 +297,8 @@ class VariousRequestResource extends Resource
                     ->modalsubheading('本当に却下しますか？')
                     ->action(
                         function ($record){
-                            // 却下の処理を個々に記述
+                            $record['status'] = 2;
+                            $record->save();
 
                         }
                     )
