@@ -24,6 +24,8 @@ class AttendaceSeeder extends Seeder
             'end_time' => '19:00:00',
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -39,6 +41,8 @@ class AttendaceSeeder extends Seeder
             'end_time' => '19:00:00',
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -54,6 +58,8 @@ class AttendaceSeeder extends Seeder
             'end_time' => '19:00:00',
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -69,6 +75,8 @@ class AttendaceSeeder extends Seeder
             'end_time' => '19:00:00',
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -81,6 +89,8 @@ class AttendaceSeeder extends Seeder
             'start_time' => now(),
             'working_address' => 1,
             'working_type' => 0,
+            'start_station' => '定期',
+            'end_station' => '定期',
             'transportation_expenses' => 0,
         ];
 
@@ -93,6 +103,8 @@ class AttendaceSeeder extends Seeder
             'start_time' => now(),
             'working_address' => 0,
             'working_type' => 1,
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -109,6 +121,8 @@ class AttendaceSeeder extends Seeder
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
             'over_time' => '03:45:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 
@@ -125,6 +139,8 @@ class AttendaceSeeder extends Seeder
             'working_time' => '08:00:00',
             'rest_time' => '01:00:00',
             'over_time' => '01:15:00',
+            'start_station' => '猫駅',
+            'end_station' => '犬駅',
             'transportation_expenses' => 1200,
         ];
 

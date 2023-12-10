@@ -28,6 +28,8 @@ class Attendance extends Model
         'working_type',
         'end_address', 
         'end_time',
+        'start_station',
+        'end_station',
         'transportation_expenses',
         'working_time',
         'rest_time',
