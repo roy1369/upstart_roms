@@ -94,6 +94,14 @@ class AttendanceResource extends Resource
                             ->placeholder('自動入力')
                             // ->disabled(! auth()->user()->authority),
                             ->disabled(),
+                        TextInput::make('start_station')
+                            ->label('出発駅')
+                            ->required()
+                            ->hidden(! auth()->user()->transportation_expenses_flag),
+                        TextInput::make('end_station')
+                            ->label('終着駅')
+                            ->required()
+                            ->hidden(! auth()->user()->transportation_expenses_flag),
                         TextInput::make('transportation_expenses')
                             ->label('交通費')
                             ->placeholder('往復分で入力')
