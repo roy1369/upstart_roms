@@ -73,4 +73,10 @@ class User extends Authenticatable
         return $this->hasMany(MonthlyReport::class, 'user_id')->withTrashed();
     }
 
+    // 現在住所情報テーブル
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id')->withTrashed();
+    }
+
 }

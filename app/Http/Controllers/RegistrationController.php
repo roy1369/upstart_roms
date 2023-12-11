@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\PaidHoliday;
+use App\Models\Address;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -41,6 +43,20 @@ class RegistrationController extends Controller
             $user->email = $request->email;                               // メールアドレス
             $user->password = $request->password;                         // パスワード
             $user->save();
+
+            // 有給管理テーブルにレコードを作成
+            $paidHoliday = new PaidHoliday;
+            $paidHoliday->user_id = $user->id;
+            $paidHoliday->amount = 0;
+            $paidHoliday->save();
+
+            // 現在住所テーブルにレコードを作成
+            $address = new Address;
+            $address->user_id = $user->id;
+            $address->save();
+
+
+
             
             // 認証コードの生成とメール送信
             $this->sendConfirmationEmail($request->email);
@@ -126,7 +142,7 @@ class RegistrationController extends Controller
 
             // メールでの通知処理
             // 件名をカスタマイズ
-            $subject = '[勤怠管理システム]仮登録完了のご案内';
+            $subject = '[勤怠管理システム]登録完了のご案内';
 
             // 本文をカスタマイズ
             $messageText = "勤怠管理システムをご利用いただき誠にありがとうございます。

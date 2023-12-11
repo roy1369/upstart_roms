@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paid_holidays', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unique()->comment('ユーザーID');
-            $table->integer('amount')->dafault(0)->comment('残日数');
-            $table->date('next_paid_holiday')->nullable(true)->comment('次回有給取得日');
+            $table->string('now_address', 255)->nullable(true)->comment('現住所');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paid_holidays');
+        Schema::dropIfExists('addresses');
     }
 };

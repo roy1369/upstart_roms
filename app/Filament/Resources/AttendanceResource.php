@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Carbon\Carbon;
 use App\Filament\Resources\AttendanceResource\Pages;
 use App\Filament\Resources\AttendanceResource\RelationManagers;
+use App\Models\Address;
 use App\Models\Attendance;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -173,11 +174,12 @@ class AttendanceResource extends Resource
                             // 差分を計算して HH:mm:ss 形式にフォーマット
                             $working_time = $end_time->diff($start_time)->format('%H:%I:%S');
 
-                            // 後で位置情報を取得する処理をここに追加する
+                            // 現在の位置情報を取得する
+                            $address = Address::where('user_id', $record['user_id'])->first();
 
-                            // データベースに保存
                             $record->update([
                                 'end_time' => $end_time,
+                                'end_address' => $address->now_address,
                                 'working_time' => $working_time,
                             ]);
                         }

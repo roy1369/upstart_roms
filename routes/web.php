@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::post('/registration', [RegistrationController::class, 'send']);
 Route::get('/registration/check', [RegistrationController::class, 'check']);
 // 登録完了画面の表示
 Route::post('/registration/comp', [RegistrationController::class, 'comp']);
+
+// 住所情報の保存処理
+Route::post('/save-location', [AddressController::class, 'endAddress']);
