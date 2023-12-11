@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AttendanceResource\Pages;
 
 use App\Filament\Resources\AttendanceResource;
+use App\Models\Address;
 use App\Models\Attendance;
 use Carbon\Carbon;
 use Filament\Notifications\Notification;
@@ -22,14 +23,16 @@ class CreateAttendance extends CreateRecord
     {
         // 現在ログイン中のユーザーを取得する
         $currentUser = Auth::user();
+        // 現在の位置情報を取得する
+        $Address = Address::where('user_id', $currentUser->id)->first();
         // ユーザーIDを格納
         $data['user_id'] = $currentUser->id;
         // 日付を格納
         $data['date'] = now();
         // 出勤時間に現在の時刻を格納
         $data['start_time'] = now();
-        // 出勤場所に住所を格納　※あとで現在の位置情報を取得できるように修正
-        $data['start_address'] = '猫県猫市猫谷町２－２２';
+        // 出勤場所に住所を格納
+        $data['start_address'] = $Address->now_address;
     
         return $data;
     }
