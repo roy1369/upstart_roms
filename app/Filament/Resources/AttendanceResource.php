@@ -175,7 +175,6 @@ class AttendanceResource extends Resource
 
                             // 後で位置情報を取得する処理をここに追加する
 
-                            // データベースに保存
                             $record->update([
                                 'end_time' => $end_time,
                                 'working_time' => $working_time,

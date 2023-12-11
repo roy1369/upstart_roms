@@ -39,6 +39,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google_maps' => [
+        'api_key' => env('GEOIP_GOOGLE_API_KEY'),
+    ],
+
     'workingAddress' => [
         0 => 'A店',
         1 => 'B店',

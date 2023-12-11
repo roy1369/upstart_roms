@@ -28,4 +28,11 @@ class ListAttendances extends ListRecords
         return 'desc';
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            AttendanceResource\Widgets\AttendanceOverview::class,
+        ];
+    }
+
 }
