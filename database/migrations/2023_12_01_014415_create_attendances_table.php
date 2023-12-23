@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('date')->comment('年月日');
             $table->string('start_address', 255)->nullable(true)->comment('出勤住所');
             $table->time('start_time')->comment('出勤時間');
-            $table->integer('working_address')->comment('勤務先');
+            $table->string('working_address', 128)->comment('勤務先');
             $table->integer('working_type')->comment('勤務形態');
             $table->string('end_address', 255)->nullable(true)->comment('退勤住所');
             $table->time('end_time')->nullable(true)->comment('退勤時間');

@@ -52,7 +52,7 @@ class Attendance extends Model
             $end_time = Carbon::parse($attendance->end_time);
             $working_type = $attendance->working_type;
 
-            // 追加修正：working_typeが0の場合、start_timeを09:00:00より前なら09:00:00に、後ならそのまま使用
+            // working_typeが0の場合、start_timeを09:00:00より前なら09:00:00に、後ならそのまま使用
             if ($working_type === 0 && $start_time->lt(Carbon::parse('09:00:00'))) {
                 $start_time = Carbon::parse('09:00:00');
             }
@@ -62,6 +62,16 @@ class Attendance extends Model
                 $start_time = Carbon::parse('10:00:00');
             }
 
+            // working_typeが2の場合、start_timeを11:00:00より前なら11:00:00に、後ならそのまま使用
+            if ($working_type === 2 && $start_time->lt(Carbon::parse('11:00:00'))) {
+                $start_time = Carbon::parse('11:00:00');
+            }
+
+            // working_typeが3の場合、start_timeを12:00:00より前なら12:00:00に、後ならそのまま使用
+            if ($working_type === 3 && $start_time->lt(Carbon::parse('12:00:00'))) {
+                $start_time = Carbon::parse('12:00:00');
+            }
+            
             // 差分を計算して 15 分刻みに調整
             $diffInMinutes = $end_time->diffInMinutes($start_time);
             $roundedDiffInMinutes = floor($diffInMinutes / 15) * 15;

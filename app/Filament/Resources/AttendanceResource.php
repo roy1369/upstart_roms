@@ -44,11 +44,10 @@ class AttendanceResource extends Resource
             ->schema([
                 Grid::make(1)
                     ->schema([
-                        Select::make('working_address')
+                        TextInput::make('working_address')
                             ->label('勤務先')
                             ->required()
-                            ->placeholder('勤務先を選択')
-                            ->options(config('services.workingAddress')),
+                            ->placeholder('勤務先を入力'),
                         Select::make('working_type')
                             ->label('勤務形態')
                             ->required()
