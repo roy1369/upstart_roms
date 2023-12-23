@@ -284,7 +284,7 @@
   border: 2px solid #000000;
 } */
 
-/* @-webkit-keyframes loading {
+@-webkit-keyframes loading {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -293,8 +293,8 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-} */
-/* @keyframes loading {
+}
+@keyframes loading {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -303,14 +303,14 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-} */
+}
 
-/* @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   form {
     width: 80vw;
     min-width: initial;
   }
-} */
+}
 
 /* 利用規約ポップアップのスタイル */
 .modal {
