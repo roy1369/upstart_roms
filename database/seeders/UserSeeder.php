@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin123'),
             'joining_date' => now(),
             'authority' => 1,
+            'full_time_authority' => 1,
             'transportation_expenses_flag' => 1,
         ];
 
@@ -35,6 +36,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'joining_date' => now(),
             'authority' => 0,
+            'full_time_authority' => 1,
             'transportation_expenses_flag' => 1,
         ];
 
@@ -48,6 +50,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'joining_date' => now(),
             'authority' => 0,
+            'full_time_authority' => 0,
             'transportation_expenses_flag' => 0,
         ];
 

@@ -60,10 +60,14 @@ class UserResource extends Resource
                         DatePicker::make('joining_date')
                             ->label('入社日')
                             ->displayFormat('Y/m/d')
-                            ->disabled(! auth()->user()->authority),
+                            ->placeholder('正社員に切替時必ず更新')
+                            ->hidden(! auth()->user()->authority)
+                            ->disabled(! auth()->user()->authority)
+                            ->required(),
                         DatePicker::make('ritirement_date')
                             ->label('退職日')
                             ->displayFormat('Y/m/d')
+                            ->hidden(! auth()->user()->authority)
                             ->disabled(! auth()->user()->authority),
                         
                     ]),
@@ -72,9 +76,15 @@ class UserResource extends Resource
                     ->label('管理者権限')
                     ->hidden(! auth()->user()->authority)
                     ->disabled(! auth()->user()->authority),
+                Toggle::make('full_time_authority')
+                    ->required()
+                    ->label('正社員権限')
+                    ->hidden(! auth()->user()->authority)
+                    ->disabled(! auth()->user()->authority),
                 Toggle::make('transportation_expenses_flag')
                     ->required()
                     ->label('交通費フラグ')
+                    ->hidden(! auth()->user()->authority)
                     ->disabled(! auth()->user()->authority),
         ]);
     }

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'joining_date',
         'retirement_date',
         'authority',
+        'full_time_authority',
+        'transportation_expenses_flag',
     ];
 
     /**
