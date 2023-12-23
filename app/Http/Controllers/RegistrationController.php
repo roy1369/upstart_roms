@@ -44,12 +44,6 @@ class RegistrationController extends Controller
             $user->password = $request->password;                         // パスワード
             $user->save();
 
-            // 有給管理テーブルにレコードを作成
-            $paidHoliday = new PaidHoliday;
-            $paidHoliday->user_id = $user->id;
-            $paidHoliday->amount = 0;
-            $paidHoliday->save();
-
             // 現在住所テーブルにレコードを作成
             $address = new Address;
             $address->user_id = $user->id;

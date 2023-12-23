@@ -26,19 +26,27 @@ class EditUser extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if (!is_null($data['joining_date'])) {
-            // joining_dateをCarbonインスタンスに変換
-            $joiningDate = Carbon::parse($data['joining_date']);
-        
-            // 6ヶ月後の日付を計算
-            $nextPaidHoliday = $joiningDate->copy()->addMonths(6)->startOfMonth();
-        
-            $paidHoliday = PaidHoliday::where('user_id', $data['id'])->first();
-            if (is_null($paidHoliday->next_paid_holiday)) {
+        $paidHoliday = PaidHoliday::where('user_id', $data['id'])->first();
+        if (is_null($paidHoliday)) {
+            // 有給管理テーブルに該当のレコードがない場合
+            if ($data['full_time_authority'] === 1) {
+                // 正社員権限がある場合
+
+                // joining_dateをCarbonインスタンスに変換
+                $joiningDate = Carbon::parse($data['joining_date']);
+                
+                // 6ヶ月後の日付を計算
+                $nextPaidHoliday = $joiningDate->copy()->addMonths(6)->startOfMonth();
+                
+                // 有給管理テーブルにレコードを作成
+                $paidHoliday = new PaidHoliday;
+                $paidHoliday->user_id = $data['id'];
+                $paidHoliday->amount = 0;
                 $paidHoliday->next_paid_holiday = $nextPaidHoliday;
                 $paidHoliday->save();
+
             }
-        }
+        } 
     
         return $data;
     }
