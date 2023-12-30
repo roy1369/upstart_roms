@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Attendance;
 use App\Models\BatchLog;
 use App\Models\User;
-use App\Models\MonthlyReport;
 use App\Services\BatchLogService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -116,7 +115,7 @@ class TransportationExpensesReport extends Command
                 $pdfFilePath = storage_path('app/public/transportation_expenses_reports/' . $generatedPDFFileName);
 
                 // アドレスを格納
-                $email = $user->email;
+                $email = config('services.mail.to');
                 $emailCc = config('services.mail.cc');
 
                 // 件名をカスタマイズ

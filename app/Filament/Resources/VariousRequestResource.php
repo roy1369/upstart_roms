@@ -276,6 +276,7 @@ class VariousRequestResource extends Resource
                             }
 
                         }
+                        
                     )
                     // 申請状況が申請中かつ管理者なら表示処理
                     ->hidden(! auth()->user()->authority)

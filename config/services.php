@@ -26,6 +26,7 @@ return [
     ],
 
     'mail' => [
+        'to' => env('MAil_TO'),
         'cc' => env('MAil_CC'),
     ],
 
