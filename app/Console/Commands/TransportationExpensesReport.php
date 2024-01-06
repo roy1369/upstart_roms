@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Attendance;
 use App\Models\BatchLog;
 use App\Models\User;
-use App\Models\MonthlyReport;
 use App\Services\BatchLogService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -116,19 +115,19 @@ class TransportationExpensesReport extends Command
                 $pdfFilePath = storage_path('app/public/transportation_expenses_reports/' . $generatedPDFFileName);
 
                 // アドレスを格納
-                $email = $user->email;
+                $email = config('services.mail.to');
                 $emailCc = config('services.mail.cc');
 
                 // 件名をカスタマイズ
-                $subject = '交通費明細書のご案内[株式会社upstart]';
+                $subject = '交通費明細書のご案内[株式会社UPSTART]';
 
                 // 本文をカスタマイズ
-                $messageText = "拝啓、お世話になっております。株式会社upstart勤怠管理システムサポートでございます。
+                $messageText = "拝啓、お世話になっております。株式会社UPSTART勤怠管理システムサポートでございます。
                     \nいつもご利用いただき、誠にありがとうございます。 $user->name 様の交通費明細書が確定いたしましたことをお知らせいたします。
-                    \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社upstart勤怠管理システムをよろしくお願いいたします。
+                    \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社UPSTART勤怠管理システムをよろしくお願いいたします。
                     \nお忙しい中、このメールをお読みいただき、誠にありがとうございます。
                     \n\n敬具
-                    \n\n株式会社upstart勤怠管理システムサポート";
+                    \n\n株式会社UPSTART勤怠管理システムサポート";
             
                 // 通知メールを送信
                 Mail::raw($messageText, function ($message) use ($email, $subject, $emailCc, $pdfFilePath) {

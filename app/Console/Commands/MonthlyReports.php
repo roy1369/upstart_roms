@@ -108,16 +108,16 @@ class MonthlyReports extends Command
                 $emailCc = config('services.mail.cc');
 
                 // 件名をカスタマイズ
-                $subject = '月報確定のご案内[株式会社upstart]';
+                $subject = '月報確定のご案内[株式会社UPSTART]';
 
                 // 本文をカスタマイズ
-                $messageText = "拝啓、お世話になっております。株式会社upstart勤怠管理システムサポートでございます。
+                $messageText = "拝啓、お世話になっております。株式会社UPSTART勤怠管理システムサポートでございます。
                     \nいつもご利用いただき、誠にありがとうございます。 $user->name 様の勤怠月報が確定いたしましたことをお知らせいたします。
                     \n\n月報の詳細に関しては、ログイン後のダッシュボード、月報管理からご確認いただけます。
-                    \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社upstart勤怠管理システムをよろしくお願いいたします。
+                    \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社UPSTART勤怠管理システムをよろしくお願いいたします。
                     \nお忙しい中、このメールをお読みいただき、誠にありがとうございます。
                     \n\n敬具
-                    \n\n株式会社upstart勤怠管理システムサポート";
+                    \n\n株式会社UPSTART勤怠管理システムサポート";
             
                 // 通知メールを送信
                 Mail::raw($messageText, function ($message) use ($email, $subject, $emailCc) {

@@ -18,6 +18,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('app:monthly-reports')->monthlyOn(1, '10:00');
         // 毎月1日の10時に交通費レポートバッチを呼び出す
         $schedule->command('app:transportation-expenses-report')->monthlyOn(1, '10:00');
+        // 毎月1日の10時に請求書バッチを呼び出す
+        $schedule->command('app:send-invoice-emails')->monthlyOn(1, '10:00');
+        // 毎日0時に物理削除バッチを呼び出す
+        $schedule->command('app:hard-deletes')->daily();
     }
 
     /**

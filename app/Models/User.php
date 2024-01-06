@@ -81,4 +81,17 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'user_id')->withTrashed();
     }
 
+    // リレーション先のデータも削除
+    public static function booted()
+    {
+        parent::boot();
+        static::deleted(function ($user) {
+            $user->attendances()->delete();
+            $user->paidHolidays()->delete();
+            $user->variousRequests()->delete();
+            $user->monthlyReports()->delete();
+            $user->addresses()->delete();
+            
+        });
+    }
 }
