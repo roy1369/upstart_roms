@@ -53,8 +53,8 @@ class EditUser extends EditRecord
 
     protected function getRedirectUrl(): string
     {
-        // リダイレクト先を/admin/loginに設定する
-        return $this->previousUrl ?? url('/admin/login');
+        // リダイレクト先を/attendancemanagement/loginに設定する
+        return $this->previousUrl ?? url('/attendancemanagement/login');
     }
 
 }

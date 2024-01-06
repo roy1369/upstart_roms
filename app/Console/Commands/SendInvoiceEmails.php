@@ -36,7 +36,7 @@ class SendInvoiceEmails extends Command
 
         // 日付を取得してファイル名に使用する
         $currentDateTime = $date->format('Y年m月');
-        $newFileName = '【御請求書】株式会社upstart様（システム運営）_' . $currentDateTime . '.xlsx';
+        $newFileName = '【御請求書】株式会社UPSTART様（システム運営）_' . $currentDateTime . '.xlsx';
 
         try{
             // テンプレートをコピーして新しいファイルを作成
@@ -78,15 +78,15 @@ class SendInvoiceEmails extends Command
             $emailCc = config('services.mail.cc');
 
             // 件名をカスタマイズ
-            $subject = '請求書のご案内[株式会社upstart]';
+            $subject = '請求書のご案内[株式会社UPSTART]';
 
             // 本文をカスタマイズ
-            $messageText = "拝啓、お世話になっております。株式会社upstart勤怠管理システムサポートでございます。
+            $messageText = "拝啓、お世話になっております。株式会社UPSTART勤怠管理システムサポートでございます。
                 \nいつもご利用いただき、誠にありがとうございます。 請求書が確定いたしましたことをお知らせいたします。
-                \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社upstart勤怠管理システムをよろしくお願いいたします。
+                \n\n何かご不明点やご質問がございましたら、お気軽にお問い合わせください。今後とも株式会社UPSTART勤怠管理システムをよろしくお願いいたします。
                 \nお忙しい中、このメールをお読みいただき、誠にありがとうございます。
                 \n\n敬具
-                \n\n株式会社upstart勤怠管理システムサポート";
+                \n\n株式会社UPSTART勤怠管理システムサポート";
         
             // 通知メールを送信
             Mail::raw($messageText, function ($message) use ($email, $subject, $emailCc, $pdfFilePath) {

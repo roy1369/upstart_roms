@@ -19,7 +19,7 @@
                 @yield('content')
             </div>
             <div class="footer">
-                Copyright © 2023 株式会社upstart. All Rights Reserved.
+                Copyright © 2023 株式会社UPSTART. All Rights Reserved.
             </div>
         </div>
     </body>

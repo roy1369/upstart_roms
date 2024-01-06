@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'path' => env('FILAMENT_PATH', 'admin'),
+    'path' => env('FILAMENT_PATH', 'attendancemanagement'),
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home_url' => '/admin/attendances',
+    'home_url' => '/attendancemanagement/attendances',
 
     /*
     |--------------------------------------------------------------------------
