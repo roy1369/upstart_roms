@@ -54,10 +54,9 @@ class VariousRequestResource extends Resource
                             ->required()
                             ->placeholder('申請種別の選択')
                             ->options(config('services.type')),
-                        Select::make('correction_working_address')
+                        TextInput::make('correction_working_address')
                             ->label('修正勤務先')
-                            ->placeholder('打刻修正の場合のみ選択')
-                            ->options(config('services.workingAddress')),
+                            ->placeholder('打刻修正の場合のみ選択'),
                         Select::make('correction_working_type')
                             ->label('修正勤務形態')
                             ->placeholder('打刻修正の場合のみ選択')
@@ -79,6 +78,7 @@ class VariousRequestResource extends Resource
                         
                     ]),
             ]);
+            
     }
 
     public static function table(Table $table): Table
@@ -346,6 +346,7 @@ class VariousRequestResource extends Resource
         } else {
             return parent::getEloquentQuery();
         }
+        
     }
 
 }
