@@ -14,6 +14,6 @@ class UserPolicy
     // 削除機能の制御
     public function delete(User $user) 
     {
-        return $user->id === 1;
+        return $user->authority === 1;
     }
 }
