@@ -346,6 +346,7 @@ class VariousRequestResource extends Resource
         } else {
             return parent::getEloquentQuery();
         }
+        
     }
 
 }
