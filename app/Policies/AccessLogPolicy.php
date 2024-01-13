@@ -10,12 +10,12 @@ class AccessLogPolicy
     // メニューバーの表示
     public function viewAny(User $user)
     {
-        return $user->id === 1;
+        return $user->authority === 1;
     }
 
     // 詳細画面の表示
     public function view(User $user, AccessLog $accessLog)
     {
-        return $user->id === 1;
+        return $user->authority === 1;
     }
 }
