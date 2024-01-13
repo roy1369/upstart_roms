@@ -78,6 +78,7 @@ class VariousRequestResource extends Resource
                         
                     ]),
             ]);
+            
     }
 
     public static function table(Table $table): Table
