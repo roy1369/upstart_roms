@@ -56,6 +56,7 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->label('パスワード')
                             ->password()
+                            ->hidden(! auth()->user())
                             ->required(),
                         DatePicker::make('joining_date')
                             ->label('入社日')
