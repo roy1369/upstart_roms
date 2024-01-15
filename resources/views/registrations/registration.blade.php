@@ -69,7 +69,10 @@
         </form>
 
         <!-- 利用規約ポップアップ -->
-        <div id="termsModal" class="modal" style="display: none;">
+        {{-- <div id="termsModal" class="modal" style="display: none;"> --}}
+
+        <div id="termsModal" class="modal" style="display: none; transform: scale(1);">
+
             <div class="modal-content">
                 <span class="close" id="closeTerms">&times;</span>
                 <!-- 利用規約の内容をここに追加 -->
@@ -145,8 +148,13 @@
             $('#passwordInput, #checkPasswordInput').val('');
             $('#passwordMatchError').text('');
             // 利用規約ポップアップ表示用
+            // $('#showTerms').click(function () {
+            //     $('#termsModal').show();
+            // });
+
+            // 利用規約ポップアップ表示用
             $('#showTerms').click(function () {
-                $('#termsModal').show();
+                $('#termsModal').show().css('transform', 'scale(1)');
             });
 
             // 利用規約ポップアップ非表示用
