@@ -55,8 +55,11 @@ class UserResource extends Resource
                             ->required(),
                         TextInput::make('password')
                             ->label('パスワード')
-                            // ->password()
-                            // ->hidden(! auth()->user())
+                            ->password()
+                            ->hidden(function ($record) {
+                                // ログイン中のユーザーとレコードのユーザーが一致する場合に非表示にする
+                                return !auth()->user() || auth()->user()->id !== $record->id;
+                            })
                             ->required(),
                         DatePicker::make('joining_date')
                             ->label('入社日')

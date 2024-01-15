@@ -42,6 +42,22 @@
                 </p>
             </div>
 
+            <!-- パスワード（確認用）入力フォーム -->
+            <div class="password-input-container">
+                <label class="label">パスワード（確認用）</label>
+                <p>
+                    <input type="password" name="checkPassword" id="checkPasswordInput" placeholder="英小文字と数字で8桁以上" class="mailform" pattern="^(?=.*[a-z])(?=.*\d)[a-z\d]{8,}$" title="英小文字と数字で8桁以上を入力してください" required autocomplete="off" oninput="checkPasswordMatch()">
+                    <span class="toggle-password" onclick="toggleCheckPasswordVisibility()">　
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" id="checkPasswordIcon" style="vertical-align: middle;">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </p>
+            </div>
+            <!-- パスワード確認一致エラーメッセージ表示領域 -->
+            <div id="passwordMatchError" class="error-message" style="color: red;"></div>
+
             <div class="centering">
                 <!-- 利用規約をポップアップ表示するためのリンク -->
                 <a href="#" id="showTerms">利用規約はこちら</a>
@@ -53,7 +69,10 @@
         </form>
 
         <!-- 利用規約ポップアップ -->
-        <div id="termsModal" class="modal" style="display: none;">
+        {{-- <div id="termsModal" class="modal" style="display: none;"> --}}
+
+        <div id="termsModal" class="modal" style="display: none; transform: scale(1);">
+
             <div class="modal-content">
                 <span class="close" id="closeTerms">&times;</span>
                 <!-- 利用規約の内容をここに追加 -->
@@ -125,9 +144,17 @@
         $('#emailError').text('{{ $emailErrorMessage }}');
         // jQueryを使用したスクリプト
         $(document).ready(function () {
+            // パスワードフィールドとエラーメッセージをリセット
+            $('#passwordInput, #checkPasswordInput').val('');
+            $('#passwordMatchError').text('');
+            // 利用規約ポップアップ表示用
+            // $('#showTerms').click(function () {
+            //     $('#termsModal').show();
+            // });
+
             // 利用規約ポップアップ表示用
             $('#showTerms').click(function () {
-                $('#termsModal').show();
+                $('#termsModal').show().css('transform', 'scale(1)');
             });
 
             // 利用規約ポップアップ非表示用
@@ -166,16 +193,42 @@
         });
 
         function togglePasswordVisibility() {
-        var passwordInput = document.getElementById('passwordInput');
-        var passwordIcon = document.getElementById('passwordIcon');
+            var passwordInput = document.getElementById('passwordInput');
+            var passwordIcon = document.getElementById('passwordIcon');
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            passwordIcon.innerHTML = '<path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />';
-        } else {
-            passwordInput.type = 'password';
-            passwordIcon.innerHTML = '<path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />';
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+             } else {
+                passwordInput.type = 'password';
+             }
         }
-    }
+
+        function toggleCheckPasswordVisibility() {
+            var passwordInput = document.getElementById('checkPasswordInput');
+            var passwordIcon = document.getElementById('checkPasswordIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+             }
+        }
+
+        function checkPasswordMatch() {
+            var passwordInput = document.getElementById('passwordInput');
+            var checkPasswordInput = document.getElementById('checkPasswordInput');
+            var passwordMatchError = document.getElementById('passwordMatchError');
+            var agreeTermsCheckbox = document.getElementById('agreeTerms');
+
+            if (passwordInput.value === checkPasswordInput.value) {
+                passwordMatchError.textContent = ''; // 一致している場合はエラーメッセージをクリア
+                if (agreeTermsCheckbox.checked) {
+                    $('#registerButton').prop('disabled', false); // 利用規約に同意している場合にボタンを有効化
+                }
+            } else {
+                passwordMatchError.textContent = 'パスワードが一致しません';
+                $('#registerButton').prop('disabled', true); // パスワードが一致しない場合はボタンを無効化
+            }
+        }
     </script>
 @endsection

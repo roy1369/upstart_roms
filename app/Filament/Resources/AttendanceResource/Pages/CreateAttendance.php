@@ -54,4 +54,10 @@ class CreateAttendance extends CreateRecord
         }
 
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // リダイレクト先を/attendancemanagement/attendancesに設定する
+        return $this->previousUrl ?? url('/attendancemanagement/attendances');
+    }
 }
