@@ -69,9 +69,7 @@
         </form>
 
         <!-- 利用規約ポップアップ -->
-        {{-- <div id="termsModal" class="modal" style="display: none;"> --}}
-
-        <div id="termsModal" class="modal" style="display: none; transform: scale(1);">
+        <div id="termsModal" class="modal" style="display: none;">
 
             <div class="modal-content">
                 <span class="close" id="closeTerms">&times;</span>
@@ -148,13 +146,8 @@
             $('#passwordInput, #checkPasswordInput').val('');
             $('#passwordMatchError').text('');
             // 利用規約ポップアップ表示用
-            // $('#showTerms').click(function () {
-            //     $('#termsModal').show();
-            // });
-
-            // 利用規約ポップアップ表示用
             $('#showTerms').click(function () {
-                $('#termsModal').show().css('transform', 'scale(1)');
+                $('#termsModal').show();
             });
 
             // 利用規約ポップアップ非表示用
