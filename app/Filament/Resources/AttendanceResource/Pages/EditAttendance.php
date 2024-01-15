@@ -21,4 +21,10 @@ class EditAttendance extends EditRecord
                 ->modalsubheading('本当に削除しますか？')
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // リダイレクト先を/attendancemanagement/attendancesに設定する
+        return $this->previousUrl ?? url('/attendancemanagement/attendances');
+    }
 }

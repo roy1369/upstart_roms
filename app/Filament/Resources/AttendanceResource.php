@@ -4,10 +4,10 @@ namespace App\Filament\Resources;
 
 use Carbon\Carbon;
 use App\Filament\Resources\AttendanceResource\Pages;
-use App\Filament\Resources\AttendanceResource\RelationManagers;
-use App\Models\Address;
+// use App\Filament\Resources\AttendanceResource\RelationManagers;
+// use App\Models\Address;
 use App\Models\Attendance;
-use Filament\Forms;
+// use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -15,16 +15,16 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+// use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Torann\GeoIP\Facades\GeoIP;
+// use Torann\GeoIP\Facades\GeoIP;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+// use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 class AttendanceResource extends Resource
 {
@@ -59,7 +59,6 @@ class AttendanceResource extends Resource
                             ->hidden(! auth()->user()->authority)
                             // ->disabled(! auth()->user()->authority),
                             ->disabled(),
-                        // あとで現在の位置情報を取得できるように修正
                         TextInput::make('start_address')
                             ->label('出勤住所')
                             ->placeholder('自動入力')
@@ -72,7 +71,6 @@ class AttendanceResource extends Resource
                             ->hidden(! auth()->user()->authority)
                             // ->disabled(! auth()->user()->authority),
                             ->disabled(),
-                        // あとで現在の位置情報を取得できるように修正　退勤ボタンアクションで実行する
                         TextInput::make('end_address')
                             ->label('退勤住所')
                             ->placeholder('自動入力')
@@ -157,42 +155,42 @@ class AttendanceResource extends Resource
                 //
             ])
             ->actions([
-                Action::make('end')
-                    ->label('退勤')
-                    ->button()
-                    ->color('success')
-                    ->requiresConfirmation()
-                    ->modalHeading('退勤確認')
-                    ->modalsubheading('本当に退勤しますか？')
-                    ->action(
-                        function ($record){
-                            // 退勤時刻の保存処理
-                            $start_time = Carbon::parse($record->start_time);
-                            $end_time = Carbon::parse($record->end_time);
+                // Action::make('end')
+                //     ->label('退勤')
+                //     ->button()
+                //     ->color('success')
+                //     ->requiresConfirmation()
+                //     ->modalHeading('退勤確認')
+                //     ->modalsubheading('本当に退勤しますか？')
+                //     ->action(
+                //         function ($record){
+                //             // 退勤時刻の保存処理
+                //             $start_time = Carbon::parse($record->start_time);
+                //             $end_time = Carbon::parse($record->end_time);
 
-                            // 差分を計算して HH:mm:ss 形式にフォーマット
-                            $working_time = $end_time->diff($start_time)->format('%H:%I:%S');
+                //             // 差分を計算して HH:mm:ss 形式にフォーマット
+                //             $working_time = $end_time->diff($start_time)->format('%H:%I:%S');
 
-                            // 現在の位置情報を取得する
-                            $address = Address::where('user_id', $record['user_id'])->first();
+                //             // 現在の位置情報を取得する
+                //             $address = Address::where('user_id', $record['user_id'])->first();
 
-                            $record->update([
-                                'end_time' => $end_time,
-                                'end_address' => $address->now_address,
-                                'working_time' => $working_time,
-                            ]);
-                        }
-                    )
-                    ->visible(
-                        function ($record) :bool{
-                            $ret = false;
-                            // 退勤時間がNULLなら表示
-                            if (is_null($record['end_time'])) {
-                                $ret = true;
-                            }
-                            return $ret;
-                        }
-                    ),
+                //             $record->update([
+                //                 'end_time' => $end_time,
+                //                 'end_address' => $address->now_address,
+                //                 'working_time' => $working_time,
+                //             ]);
+                //         }
+                //     )
+                //     ->visible(
+                //         function ($record) :bool{
+                //             $ret = false;
+                //             // 退勤時間がNULLなら表示
+                //             if (is_null($record['end_time'])) {
+                //                 $ret = true;
+                //             }
+                //             return $ret;
+                //         }
+                //     ),
                 Action::make('endON')
                     ->label('退勤済')
                     ->button()
@@ -207,12 +205,12 @@ class AttendanceResource extends Resource
                             return $ret;
                         }
                     ),
-                ViewAction::make()
-                    ->label('詳細')
-                    ->icon('')
-                    ->button(),
                 EditAction::make()
                     ->label('編集')
+                    ->icon('')
+                    ->button(),
+                ViewAction::make()
+                    ->label('詳細')
                     ->icon('')
                     ->button(),
             ])
