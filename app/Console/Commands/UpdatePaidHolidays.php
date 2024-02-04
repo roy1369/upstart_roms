@@ -93,7 +93,7 @@ class UpdatePaidHolidays extends Command
                     // 通知メールを送信
                     Mail::raw($messageText, function ($message) use ($email, $subject, $emailCc) {
                         $message->to($email);
-                        // $message->cc($emailCc);
+                        $message->cc($emailCc);
                         $message->subject($subject);
                     });
                 }

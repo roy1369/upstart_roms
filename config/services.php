@@ -26,8 +26,8 @@ return [
     ],
 
     'mail' => [
-        'to' => env('MAil_TO'),
-        'cc' => env('MAil_CC'),
+        'to' => env('MAIl_TO'),
+        'cc' => env('MAIl_CC'),
     ],
 
     'postmark' => [

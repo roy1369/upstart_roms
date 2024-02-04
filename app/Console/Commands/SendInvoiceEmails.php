@@ -91,7 +91,7 @@ class SendInvoiceEmails extends Command
             // 通知メールを送信
             Mail::raw($messageText, function ($message) use ($email, $subject, $emailCc, $pdfFilePath) {
                 $message->to($email);
-                // $message->cc($emailCc);
+                $message->cc($emailCc);
                 $message->subject($subject);
                 $message->attach($pdfFilePath);
             });
