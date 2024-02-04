@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <title>@yield('title')</title>
         <meta name="description" content="勤怠管理システムアカウント登録ページ" />
-        {{-- <meta name="viewport" content="width=device-width, initial-scale=1" /> --}}
-        <meta name="viewport" content="user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        {{-- <meta name="viewport" content="user-scalable=no" /> --}}
         <link rel="stylesheet" href='/css/checkout.css' />
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
