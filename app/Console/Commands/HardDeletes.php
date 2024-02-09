@@ -62,7 +62,7 @@ class HardDeletes extends Command
                 'User', 
                 'PaidHoliday',
                 'MonthlyReport',
-                'address',
+                'Address',
                 'Attendance', 
                 'VariousRequest', 
             ];
